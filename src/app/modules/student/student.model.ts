@@ -11,30 +11,35 @@ const guardiansSchema = new Schema<Guardians>({
 const userNameSchema = new Schema<UserName>({
   firstName: {
     type: String,
-    required: true,
+    required: [true, 'First name is required'],
+    maxlength: [15, 'First name maximum length is 15'],
   },
   middleName: {
     type: String,
   },
   lastName: {
     type: String,
-    required: true,
+    required: [true, 'last name is required'],
+    maxlength: [15, 'Last name maximum length is 15'],
   },
 })
 
 const studentSchema = new Schema<Student>({
-  id: { type: String },
+  id: { type: String, required: true, unique: true },
   name: {
     type: userNameSchema,
     required: true,
   },
   gender: {
     type: String,
-    enum: ['male', 'female'],
+    enum: {
+      values: ['male', 'female'],
+      message: '{VALUE} is not valid',
+    },
     required: true,
   },
   dateOfBirth: { type: String },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   contactNo: { type: String, required: true },
   bloodGroup: {
     type: String,
