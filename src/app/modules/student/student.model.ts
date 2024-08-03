@@ -11,14 +11,17 @@ const guardiansSchema = new Schema<Guardians>({
 const userNameSchema = new Schema<UserName>({
   firstName: {
     type: String,
+    trim: true,
     required: [true, 'First name is required'],
     maxlength: [15, 'First name maximum length is 15'],
   },
   middleName: {
     type: String,
+    trim: true,
   },
   lastName: {
     type: String,
+    trim: true,
     required: [true, 'last name is required'],
     maxlength: [15, 'Last name maximum length is 15'],
   },
