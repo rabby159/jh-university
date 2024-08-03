@@ -36,6 +36,6 @@ const studentSchema = new Schema<Student>({
   guardians: guardiansSchema,
   profileImg: { type: String, required: true },
   isActive: ['active', 'irregular'],
-});
+})
 
-export const StudentModel = model<Student>('Student', studentSchema);
+export const StudentModel = model<Student>('Student', studentSchema)
