@@ -15,7 +15,6 @@ const userNameSchema = new Schema<UserName>({
   },
   middleName: {
     type: String,
-    required: true,
   },
   lastName: {
     type: String,
@@ -25,7 +24,10 @@ const userNameSchema = new Schema<UserName>({
 
 const studentSchema = new Schema<Student>({
   id: { type: String },
-  name: userNameSchema,
+  name: {
+    type: userNameSchema,
+    required: true,
+  },
   gender: {
     type: String,
     enum: ['male', 'female'],
@@ -40,7 +42,10 @@ const studentSchema = new Schema<Student>({
   },
   presentAddress: { type: String },
   permanentAddress: { type: String },
-  guardians: guardiansSchema,
+  guardians: {
+    type: guardiansSchema,
+    required: true,
+  },
   profileImg: { type: String, required: true },
   isActive: {
     type: String,
