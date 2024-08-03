@@ -26,16 +26,27 @@ const userNameSchema = new Schema<UserName>({
 const studentSchema = new Schema<Student>({
   id: { type: String },
   name: userNameSchema,
-  gender: ['male', 'female'],
+  gender: {
+    type: String,
+    enum: ['male', 'female'],
+    required: true,
+  },
   dateOfBirth: { type: String },
   email: { type: String, required: true },
   contactNo: { type: String, required: true },
-  bloodGroup: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+  bloodGroup: {
+    type: String,
+    enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+  },
   presentAddress: { type: String },
   permanentAddress: { type: String },
   guardians: guardiansSchema,
   profileImg: { type: String, required: true },
-  isActive: ['active', 'irregular'],
+  isActive: {
+    type: String,
+    enum: ['active', 'irregular'],
+    default: 'active',
+  },
 })
 
 export const StudentModel = model<Student>('Student', studentSchema)
