@@ -5,6 +5,8 @@ const createStudent = async (req: Request, res: Response) => {
   try {
     const { student: studentData } = req.body
 
+    //data validation using zod
+
     //will we call services function to send this data
     const result = await StudentServices.createStudentIntoDB(studentData)
 
