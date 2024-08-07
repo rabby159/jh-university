@@ -1,5 +1,7 @@
+import { StudentModel } from './student.model'
 import { Schema, model } from 'mongoose'
-import { Guardians, Student, UserName } from './student.interface'
+import { Guardians, TStudent, UserName } from './student.interface'
+import { boolean } from 'zod'
 
 const guardiansSchema = new Schema<Guardians>({
   fatherName: { type: String, required: true },
@@ -27,39 +29,52 @@ const userNameSchema = new Schema<UserName>({
   },
 })
 
-const studentSchema = new Schema<Student>({
-  id: { type: String, required: true, unique: true },
-  name: {
-    type: userNameSchema,
-    required: true,
-  },
-  gender: {
-    type: String,
-    enum: {
-      values: ['male', 'female'],
-      message: '{VALUE} is not valid',
-    },
-    required: true,
-  },
-  dateOfBirth: { type: String },
-  email: { type: String, required: true, unique: true },
-  contactNo: { type: String, required: true },
-  bloodGroup: {
-    type: String,
-    enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
-  },
-  presentAddress: { type: String },
-  permanentAddress: { type: String },
-  guardians: {
-    type: guardiansSchema,
-    required: true,
-  },
-  profileImg: { type: String, required: true },
-  isActive: {
-    type: String,
-    enum: ['active', 'irregular'],
-    default: 'active',
-  },
-})
+const studentSchema = new Schema<TStudent, StudentModel>(
+  {
+    id: { type: String, required: true, unique: true },
 
-export const StudentModel = model<Student>('Student', studentSchema)
+    user: {
+      type: Schema.Types.ObjectId,
+      required: [true, 'ID is must require'],
+      unique: true,
+      ref: 'User',
+    },
+    name: {
+      type: userNameSchema,
+      required: true,
+    },
+    gender: {
+      type: String,
+      enum: {
+        values: ['male', 'female'],
+        message: '{VALUE} is not valid',
+      },
+      required: true,
+    },
+    dateOfBirth: { type: String },
+    email: { type: String, required: true, unique: true },
+    contactNo: { type: String, required: true },
+    bloodGroup: {
+      type: String,
+      enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+    },
+    presentAddress: { type: String },
+    permanentAddress: { type: String },
+    guardians: {
+      type: guardiansSchema,
+      required: true,
+    },
+    profileImg: { type: String },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  },
+)
+
+export const StudentModel = model<TStudent>('Student', studentSchema)

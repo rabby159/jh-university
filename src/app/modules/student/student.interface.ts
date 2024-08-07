@@ -1,4 +1,4 @@
-import {} from 'mongoose'
+import { Types } from 'mongoose'
 
 export type Guardians = {
   fatherName: string
@@ -13,9 +13,10 @@ export type UserName = {
   lastName: string
 }
 
-export type Student = {
-  id: string
-  name: UserName
+export type TStudent = {
+  id: string,
+  user: Types.ObjectId;
+  name: UserName;
   gender: 'male' | 'female'
   dateOfBirth?: string
   email: string
@@ -25,5 +26,6 @@ export type Student = {
   permanentAddress: string
   guardians: Guardians
   profileImg?: string
-  isActive: 'active' | 'irregular'
+  isActive: 'active' | 'irregular';
+  isDeleted : boolean
 }
