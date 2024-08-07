@@ -46,4 +46,4 @@ const studentValidationSchema = z.object({
   isActive: z.enum(['active', 'irregular']).default('active'),
 })
 
-export default studentValidationSchema
+export default studentValidationSchema;
