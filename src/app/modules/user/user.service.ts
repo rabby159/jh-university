@@ -28,9 +28,8 @@ const createStudentIntoDB = async (password: string, studentData: TStudent) => {
 
     const newStudent = Student.create(studentData)
 
-    return newStudent;
+    return newStudent
   }
-
 }
 
 export const userServices = {
