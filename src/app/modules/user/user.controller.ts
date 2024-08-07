@@ -1,5 +1,6 @@
+import { Request, Response } from 'express'
 import { userServices } from './user.service'
-import { UserValidation } from './user.validation'
+// import { UserValidation } from './user.validation'
 
 const createStudent = async (req: Request, res: Response) => {
   try {
@@ -24,4 +25,8 @@ const createStudent = async (req: Request, res: Response) => {
       error: err,
     })
   }
+}
+
+export const UserControllers = {
+  createStudent,
 }

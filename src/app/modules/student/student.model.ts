@@ -1,7 +1,5 @@
-import { StudentModel } from './student.model'
 import { Schema, model } from 'mongoose'
 import { Guardians, TStudent, UserName } from './student.interface'
-import { boolean } from 'zod'
 
 const guardiansSchema = new Schema<Guardians>({
   fatherName: { type: String, required: true },
@@ -29,7 +27,7 @@ const userNameSchema = new Schema<UserName>({
   },
 })
 
-const studentSchema = new Schema<TStudent, StudentModel>(
+const studentSchema = new Schema<TStudent>(
   {
     id: { type: String, required: true, unique: true },
 
@@ -77,4 +75,4 @@ const studentSchema = new Schema<TStudent, StudentModel>(
   },
 )
 
-export const StudentModel = model<TStudent>('Student', studentSchema)
+export const Student = model<TStudent>('Student', studentSchema)

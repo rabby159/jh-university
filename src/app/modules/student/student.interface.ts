@@ -26,6 +26,5 @@ export type TStudent = {
   permanentAddress: string
   guardians: Guardians
   profileImg?: string
-  isActive: 'active' | 'irregular';
   isDeleted : boolean
 }
