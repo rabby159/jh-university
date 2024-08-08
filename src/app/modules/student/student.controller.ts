@@ -3,42 +3,37 @@ import { StudentServices } from './student.service'
 import sendResponse from '../../utils/sendResponse'
 import httpStatus from 'http-status'
 
-const getAllStudents: RequestHandler = async (req, res, Next) => {
-  try {
-    const result = await StudentServices.getAllStudentFromDB()
-
-    res.status(200).json({
-      success: true,
-      message: 'Student details get successfully',
-      data: result,
-    })
-  } catch (err) {
-    Next(err)
+//higher order function
+const catchAsync = (fn: RequestHandler) => {
+  return (req: Request, res: Response, Next: NextFunction) => {
+    Promise.resolve(fn(req, res, Next)).catch((err) => Next(err))
   }
 }
 
-const getSingleStudent: RequestHandler = async (req, res, Next) => {
-  try {
-    const { studentId } = req.params
+const getAllStudents: RequestHandler = catchAsync(async (req, res, Next) => {
+  const result = await StudentServices.getAllStudentFromDB()
 
-    const result = await StudentServices.getSingleStudentFromDB(studentId)
+  res.status(200).json({
+    success: true,
+    message: 'Student details get successfully',
+    data: result,
+  })
+})
 
-    res.status(200).json({
-      success: true,
-      message: 'Single Student details get successfully',
-      data: result,
-    })
-  } catch (err) {
-    Next(err)
-  }
-}
+const getSingleStudent: RequestHandler = catchAsync(async (req, res, Next) => {
+  const { studentId } = req.params
 
-const deleteStudent = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
+  const result = await StudentServices.getSingleStudentFromDB(studentId)
+
+  res.status(200).json({
+    success: true,
+    message: 'Single Student details get successfully',
+    data: result,
+  })
+})
+
+const deleteStudent = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { studentId } = req.params
     const result = await StudentServices.deleteStudentFromDB(studentId)
 
@@ -48,10 +43,8 @@ const deleteStudent = async (
       message: 'Student is deleted succesfully',
       data: result,
     })
-  } catch (err) {
-    next(err)
-  }
-}
+  },
+)
 
 export const StudentControllers = {
   getAllStudents,
