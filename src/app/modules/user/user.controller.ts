@@ -1,12 +1,8 @@
-import { NextFunction, Request, Response } from 'express'
+import { RequestHandler } from 'express'
 import { userServices } from './user.service'
 // import { UserValidation } from './user.validation'
 
-const createStudent = async (
-  req: Request,
-  res: Response,
-  Next: NextFunction,
-) => {
+const createStudent: RequestHandler = async (req, res, Next) => {
   try {
     const { password, student: studentData } = req.body
 
