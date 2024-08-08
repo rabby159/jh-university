@@ -25,27 +25,29 @@ const userNameValidationSchema = z.object({
 
 // Define Zod schema for Student
 const studentValidationSchema = z.object({
-  id: z.string().min(1, 'ID is required'),
-  name: userNameValidationSchema,
-  gender: z.enum(['male', 'female'], {
-    errorMap: () => ({ message: 'Invalid gender value' }),
+  body: z.object({
+    id: z.string().min(1, 'ID is required'),
+    name: userNameValidationSchema,
+    gender: z.enum(['male', 'female'], {
+      errorMap: () => ({ message: 'Invalid gender value' }),
+    }),
+    dateOfBirth: z.string().optional(),
+    email: z.string().email('Invalid email address'),
+    contactNo: z.string().min(1, 'Contact number is required'),
+    bloodGroup: z
+      .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
+      .optional(),
+    presentAddress: z.string().min(1, 'Present Address is required'),
+    permanentAddress: z.string().min(1, 'Permanent Address is required'),
+    guardians: guardiansValidationSchema,
+    profileImg: z
+      .string()
+      .url('Invalid URL for profile image')
+      .min(1, 'Profile image URL is required'),
+    isActive: z.enum(['active', 'irregular']).default('active'),
   }),
-  dateOfBirth: z.string().optional(),
-  email: z.string().email('Invalid email address'),
-  contactNo: z.string().min(1, 'Contact number is required'),
-  bloodGroup: z
-    .enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
-    .optional(),
-  presentAddress: z.string().min(1, 'Present Address is required'),
-  permanentAddress: z.string().min(1, 'Permanent Address is required'),
-  guardians: guardiansValidationSchema,
-  profileImg: z
-    .string()
-    .url('Invalid URL for profile image')
-    .min(1, 'Profile image URL is required'),
-  isActive: z.enum(['active', 'irregular']).default('active'),
 })
 
-export const studentValidationSchemes = {
+export const studentValidations = {
   studentValidationSchema,
 }
