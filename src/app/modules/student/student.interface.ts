@@ -18,7 +18,7 @@ export type TStudent = {
   user: Types.ObjectId
   name: UserName
   gender: 'male' | 'female'
-  dateOfBirth?: string
+  dateOfBirth?: Date
   email: string
   contactNo: string
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-'

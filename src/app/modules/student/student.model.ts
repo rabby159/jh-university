@@ -49,7 +49,7 @@ const studentSchema = new Schema<TStudent>(
       },
       required: true,
     },
-    dateOfBirth: { type: String },
+    dateOfBirth: { type: Date },
     email: { type: String, required: true, unique: true },
     contactNo: { type: String, required: true },
     bloodGroup: {
@@ -73,34 +73,33 @@ const studentSchema = new Schema<TStudent>(
       virtuals: true,
     },
   },
-);
+)
 
 // virtual
 studentSchema.virtual('fullName').get(function () {
-  return this.name.firstName + this.name.middleName + this.name.lastName;
-});
+  return this.name.firstName + this.name.middleName + this.name.lastName
+})
 
 // Query Middleware
 studentSchema.pre('find', function (next) {
-  this.find({ isDeleted: { $ne: true } });
-  next();
-});
+  this.find({ isDeleted: { $ne: true } })
+  next()
+})
 
 studentSchema.pre('findOne', function (next) {
-  this.find({ isDeleted: { $ne: true } });
-  next();
-});
+  this.find({ isDeleted: { $ne: true } })
+  next()
+})
 
 studentSchema.pre('aggregate', function (next) {
-  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
-  next();
-});
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } })
+  next()
+})
 
 //creating a custom static method
 studentSchema.statics.isUserExists = async function (id: string) {
-  const existingUser = await Student.findOne({ id });
-  return existingUser;
-};
-
+  const existingUser = await Student.findOne({ id })
+  return existingUser
+}
 
 export const Student = model<TStudent>('Student', studentSchema)
