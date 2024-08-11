@@ -1,7 +1,11 @@
 import { z } from 'zod'
 
 const createAcademicValidationSchema = z.object({
-  body : 
+  body : z.object({
+    name : z.enum({
+      
+    })
+  })
 })
 
 export const AcademicSemesterValidation = {
