@@ -1,11 +1,12 @@
 import catchAsync from '../../utils/catchAsync'
+import { AcademicSemesterServices } from './academicSemester.service'
 // import { UserValidation } from './user.validation'
 
 const createAcademicSemester = catchAsync(async (req, res) => {
-  //const { password, student: studentData } = req.body
-
   //will we call services function to send this data
-  //const result = await userServices.createStudentIntoDB(password, studentData)
+  const result = await AcademicSemesterServices.createAcademicSemesterIntoDB(
+    req.body,
+  )
 
   //send response
   res.status(200).json({
