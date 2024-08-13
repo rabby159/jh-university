@@ -45,6 +45,7 @@ const createStudentValidationSchema = z.object({
         .string()
         .url('Invalid URL for profile image')
         .min(1, 'Profile image URL is required'),
+      admissionSemester: z.string(),
     }),
   }),
 })
