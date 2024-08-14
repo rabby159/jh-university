@@ -25,4 +25,4 @@ router.patch(
 
 router.get('/', AcademicFacultyControllers.getAllAcademicFaculties)
 
-export const AcademicSemesterRoutes = router
+export const AcademicFacultyRoutes = router
