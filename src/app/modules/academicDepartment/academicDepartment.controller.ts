@@ -32,7 +32,7 @@ const getSingleAcademicDepartment = catchAsync(async (req, res) => {
   const { departmentId } = req.params
   const result =
     await AcademicDepartmentServices.getSingleAcademicDepartmentFromDB(
-        departmentId,
+      departmentId,
     )
 
   sendResponse(res, {
@@ -47,7 +47,7 @@ const updateAcademicDepartment = catchAsync(async (req, res) => {
   const { departmentId } = req.params
   const result =
     await AcademicDepartmentServices.updateAcademicDepartmentIntoDB(
-        departmentId,
+      departmentId,
       req.body,
     )
 
@@ -59,7 +59,7 @@ const updateAcademicDepartment = catchAsync(async (req, res) => {
   })
 })
 
-export const AcademicFacultyControllers = {
+export const AcademicDepartmentControllers = {
   createAcademicDepartment,
   getAllAcademicDepartments,
   getSingleAcademicDepartment,
