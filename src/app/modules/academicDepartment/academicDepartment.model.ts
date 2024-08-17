@@ -37,6 +37,8 @@ academicDepartmentSchema.pre('findOneAndUpdate', async function (next) {
   if (!isDepartmentExist) {
     throw new Error('Department does not exist. ')
   }
+
+  next()
 })
 
 export const AcademicDepartment = model<TAcademicDepartment>(
