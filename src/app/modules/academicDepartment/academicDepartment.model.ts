@@ -1,6 +1,5 @@
 import { model, Schema } from 'mongoose'
 import { TAcademicDepartment } from './academicDepartment.interface'
-import { number } from 'zod'
 import AppError from '../../errors/appError'
 import httpStatus from 'http-status'
 
