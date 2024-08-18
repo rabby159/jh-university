@@ -28,7 +28,6 @@ const updateAcademicDepartmentValidationSchema = z.object({
       .optional(),
   }),
 })
-
 export const AcademicDepartmentValidation = {
   createAcademicDepartmentValidationSchema,
   updateAcademicDepartmentValidationSchema,
