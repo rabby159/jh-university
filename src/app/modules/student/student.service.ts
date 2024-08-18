@@ -28,6 +28,11 @@ const getSingleStudentFromDB = async (id: string) => {
   return result
 }
 
+const updatedStudentIntoDB = async (id: string) => {
+  const result = await Student.findOne({ id })
+  return result
+}
+
 const deleteStudentFromDB = async (id: string) => {
   const session = await mongoose.startSession()
 
@@ -58,7 +63,7 @@ const deleteStudentFromDB = async (id: string) => {
     session.endSession()
 
     return deletedStudent
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   } catch (err) {
     session.abortTransaction()
     session.endSession()
@@ -68,5 +73,6 @@ const deleteStudentFromDB = async (id: string) => {
 export const StudentServices = {
   getAllStudentFromDB,
   getSingleStudentFromDB,
+  updatedStudentIntoDB,
   deleteStudentFromDB,
 }
