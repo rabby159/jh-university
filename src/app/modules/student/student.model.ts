@@ -1,12 +1,6 @@
 import { Schema, model } from 'mongoose'
-import { Guardians, TStudent, UserName } from './student.interface'
+import { Guardians, StudentModel, TStudent, UserName } from './student.interface'
 
-const guardiansSchema = new Schema<Guardians>({
-  fatherName: { type: String, required: true },
-  fatherOccupation: { type: String, required: true },
-  motherName: { type: String, required: true },
-  motherOccupation: { type: String, required: true },
-})
 
 const userNameSchema = new Schema<UserName>({
   firstName: {
@@ -27,7 +21,15 @@ const userNameSchema = new Schema<UserName>({
   },
 })
 
-const studentSchema = new Schema<TStudent>(
+
+const guardiansSchema = new Schema<Guardians>({
+  fatherName: { type: String, required: true },
+  fatherOccupation: { type: String, required: true },
+  motherName: { type: String, required: true },
+  motherOccupation: { type: String, required: true },
+})
+
+const studentSchema = new Schema<TStudent, StudentModel>(
   {
     id: { type: String, required: true, unique: true },
 
@@ -110,4 +112,4 @@ studentSchema.statics.isUserExists = async function (id: string) {
   return existingUser
 }
 
-export const Student = model<TStudent>('Student', studentSchema)
+export const Student = model<TStudent, StudentModel>('Student', studentSchema)

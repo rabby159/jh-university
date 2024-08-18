@@ -1,4 +1,5 @@
-import { Types } from 'mongoose'
+/* eslint-disable no-unused-vars */
+import { Model, Types } from 'mongoose'
 
 export type Guardians = {
   fatherName: string
@@ -16,6 +17,7 @@ export type UserName = {
 export type TStudent = {
   id: string
   user: Types.ObjectId
+  password: string
   name: UserName
   gender: 'male' | 'female'
   dateOfBirth?: Date
@@ -29,4 +31,8 @@ export type TStudent = {
   admissionSemester: Types.ObjectId
   isDeleted: boolean
   academicDepartment: Types.ObjectId
+}
+
+export interface StudentModel extends Model<TStudent> {
+  isUserExists(id: string): Promise<TStudent | null>
 }

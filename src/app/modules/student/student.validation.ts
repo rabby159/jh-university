@@ -81,9 +81,9 @@ const updateUserNameValidationSchema = z.object({
     .optional(),
 })
 
-const updateStudentValidationSchema = z.object({
+export const updateStudentValidationSchema = z.object({
   body: z.object({
-    password: z.string().max(15).optional(),
+    // password: z.string().max(15).optional(),
     student: z.object({
       name: updateUserNameValidationSchema,
       gender: z
