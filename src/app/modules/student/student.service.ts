@@ -37,7 +37,7 @@ const updatedStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
   }
 
   /*
-    guardain: {
+    guardians: {
       fatherOccupation:"Teacher"
     }
 
@@ -55,7 +55,7 @@ const updatedStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
 
   if (guardians && Object.keys(guardians).length) {
     for (const [key, value] of Object.entries(guardians)) {
-      modifiedUpdatedData[`guardian.${key}`] = value
+      modifiedUpdatedData[`guardians.${key}`] = value
     }
   }
 
