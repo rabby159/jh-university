@@ -50,12 +50,26 @@ const getAllStudentFromDB = async (query: Record<string, unknown>) => {
 
   const sortQuery = filterQuery.sort(sort)
 
-  let limit = 1;
-  if(query.limit){
-    limit = query.limit;
-  };
+  // PAGINATION FUNCTIONALITY:
 
-  const limitQuery = await sortQuery.limit(limit)
+  let page = 1 // SET DEFAULT VALUE FOR PAGE
+  let limit = 1 // SET DEFAULT VALUE FOR LIMIT
+  let skip = 0 // SET DEFAULT VALUE FOR SKIP
+  
+  // IF limit IS GIVEN SET IT
+  if (query.limit) {
+    limit = Number(query.limit)
+  }
+
+  // IF page IS GIVEN SET IT
+  if (query.page) {
+    page = Number(query.page)
+    skip = (page - 1) * limit
+  }
+
+  const paginateQuery = sortQuery.skip(skip);
+
+  const limitQuery = paginateQuery.limit(limit);
 
   return limitQuery
 }
