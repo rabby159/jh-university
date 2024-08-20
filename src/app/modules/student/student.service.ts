@@ -4,9 +4,11 @@ import AppError from '../../errors/appError'
 import httpStatus from 'http-status'
 import { User } from '../user/user.model'
 import { TStudent } from './student.interface'
+import { studentSearchableFields } from './student.constant'
 
 const getAllStudentFromDB = async (query: Record<string, unknown>) => {
-  //const queryObj = { ...query }; // copying req.query object so that we can mutate the copy object
+  const queryObj = { ...query } // copying req.query object so that we can mutate the copy object
+
   let searchTerm = ''
 
   // IF searchTerm  IS GIVEN SET IT
@@ -14,11 +16,20 @@ const getAllStudentFromDB = async (query: Record<string, unknown>) => {
     searchTerm = query?.searchTerm as string
   }
 
-  const result = await Student.find({
-    $or: ['email', 'name.firstName', 'presentAddress'].map((field) => ({
+  // WE ARE DYNAMICALLY DOING IT USING LOOP
+  const searchQuery = Student.find({
+    $or: studentSearchableFields.map((field) => ({
       [field]: { $regex: searchTerm, $options: 'i' },
     })),
   })
+
+  // FILTERING fUNCTIONALITY:
+
+  const excludeFields = ['searchTerm', 'sort', 'limit', 'page', 'fields']
+  excludeFields.forEach((el) => delete queryObj[el]) // DELETING THE FIELDS SO THAT IT CAN'T MATCH OR FILTER EXACTLY
+
+  const result = await searchQuery
+    .find(query)
     .populate('admissionSemester')
     .populate({
       path: 'academicDepartment',
