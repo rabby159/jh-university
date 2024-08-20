@@ -70,8 +70,25 @@ const getAllStudentFromDB = async (query: Record<string, unknown>) => {
   const paginateQuery = sortQuery.skip(skip);
 
   const limitQuery = paginateQuery.limit(limit);
+  
+  
+  // FIELDS LIMITING FUNCTIONALITY:
 
-  return limitQuery
+  // HOW OUR FORMAT SHOULD BE FOR PARTIAL MATCH 
+
+  //fields: 'name,email'; // WE ARE ACCEPTING FROM REQUEST
+  //fields: 'name email'; // HOW IT SHOULD BE 
+
+  let fields = '-__v'; // SET DEFAULT VALUE
+
+  if (query.fields) {
+    fields = (query.fields as string).split(',').join(' ');
+
+  }
+
+  const fieldQuery = await limitQuery.select(fields);
+
+  return fieldQuery
 }
 
 const getSingleStudentFromDB = async (id: string) => {
