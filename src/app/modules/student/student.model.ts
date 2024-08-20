@@ -1,6 +1,10 @@
 import { Schema, model } from 'mongoose'
-import { Guardians, StudentModel, TStudent, UserName } from './student.interface'
-
+import {
+  Guardians,
+  StudentModel,
+  TStudent,
+  UserName,
+} from './student.interface'
 
 const userNameSchema = new Schema<UserName>({
   firstName: {
@@ -20,7 +24,6 @@ const userNameSchema = new Schema<UserName>({
     maxlength: [15, 'Last name maximum length is 15'],
   },
 })
-
 
 const guardiansSchema = new Schema<Guardians>({
   fatherName: { type: String, required: true },
@@ -87,7 +90,7 @@ const studentSchema = new Schema<TStudent, StudentModel>(
 
 // virtual
 studentSchema.virtual('fullName').get(function () {
-  return this.name.firstName + this.name.middleName + this.name.lastName
+  return this?.name?.firstName + this?.name?.middleName + this?.name?.lastName
 })
 
 // Query Middleware
