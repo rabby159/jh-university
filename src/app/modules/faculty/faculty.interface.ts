@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Model, Types } from "mongoose";
 
 export type TGender = 'male' | 'female' | 'other';
 export type TBloodGroup =
@@ -27,10 +27,15 @@ export type TBloodGroup =
     email: string;
     contactNo: string;
     emergencyContactNo: string;
-    bloogGroup?: TBloodGroup;
+    bloodGroup?: TBloodGroup;
     presentAddress: string;
     permanentAddress: string;
     profileImg?: string;
     academicDepartment: Types.ObjectId;
     isDeleted: boolean;
   };
+
+  export interface FacultyModel extends Model<TFaculty> {
+    // eslint-disable-next-line no-unused-vars
+    isUserExists(id: string): Promise<TFaculty | null>;
+  }
