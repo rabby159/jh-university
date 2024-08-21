@@ -76,8 +76,8 @@ const getAllStudentFromDB = async (query: Record<string, unknown>) => {
 
   // HOW OUR FORMAT SHOULD BE FOR PARTIAL MATCH 
 
-  //fields: 'name,email'; // WE ARE ACCEPTING FROM REQUEST
-  //fields: 'name email'; // HOW IT SHOULD BE 
+  //fields: 'name,email'; // ACCEPTING FROM REQUEST
+  //fields: 'name email'; // HOW IT SHOULD 
 
   let fields = '-__v'; // SET DEFAULT VALUE
 
