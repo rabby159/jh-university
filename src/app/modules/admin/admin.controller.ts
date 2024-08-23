@@ -51,7 +51,7 @@ const deleteAdmin = catchAsync(async (req, res) => {
   });
 });
 
-export const FacultyControllers = {
+export const AdminControllers = {
     getSingleAdmin,
     getAllAdmins,
     updateAdmin,
