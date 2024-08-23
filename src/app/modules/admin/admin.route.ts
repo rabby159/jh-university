@@ -18,4 +18,4 @@ router.delete('/:id', AdminControllers.deleteAdmin);
 
 router.get('/', AdminControllers.getAllAdmins);
 
-export const FacultyRoutes = router;
+export const AdminRoutes = router;
