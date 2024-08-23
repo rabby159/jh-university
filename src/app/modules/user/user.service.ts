@@ -97,7 +97,7 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
   try {
     session.startTransaction();
     //set  generated id
-    userData.id = await generaFId();
+    userData.id = await generateFacultyId();
 
 
 
