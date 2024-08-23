@@ -123,6 +123,7 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
     await session.endSession();
 
     return newFaculty;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     await session.abortTransaction();
     await session.endSession();
@@ -133,8 +134,5 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
 export const UserServices = {
   createStudentIntoDB,
   createFacultyIntoDB,
-}
-function generateFacultyId(): string | PromiseLike<string | undefined> | undefined {
-  throw new Error('Function not implemented.')
 }
 
