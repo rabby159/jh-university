@@ -9,6 +9,9 @@ import { generateStudentId } from './user.utils'
 import AppError from '../../errors/appError'
 import httpStatus from 'http-status'
 import { AcademicDepartment } from '../academicDepartment/academicDepartment.model'
+import { TFaculty } from '../faculty/faculty.interface'
+import { Faculty } from '../faculty/faculty.model'
+import {generateFacultyId} from '../user/user.utils'
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {
   // create a user object
@@ -75,7 +78,7 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
   const userData: Partial<TUser> = {};
 
   //if password is not given , use deafult password
-  userData.password = password || (config.default_password as string);
+  userData.password = password || (config.default_pass as string);
 
   //set student role
   userData.role = 'faculty';
@@ -94,7 +97,9 @@ const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
   try {
     session.startTransaction();
     //set  generated id
-    userData.id = await generateFacultyId();
+    userData.id = await generaFId();
+
+
 
     // create a user (transaction-1)
     const newUser = await User.create([userData], { session }); // array
@@ -130,3 +135,15 @@ export const UserServices = {
   createStudentIntoDB,
   createFacultyIntoDB,
 }
+function generateFacultyId(): string | PromiseLike<string | undefined> | undefined {
+  throw new Error('Function not implemented.')
+}
+
+function generateAdminId(): string | PromiseLike<string | undefined> | undefined {
+  throw new Error('Function not implemented.')
+}
+
+function generaFaltuId(): string | PromiseLike<string | undefined> | undefined {
+  throw new Error('Function not implemented.')
+}
+
