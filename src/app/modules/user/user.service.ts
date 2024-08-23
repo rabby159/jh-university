@@ -5,13 +5,14 @@ import { Student } from '../student/student.model'
 import { AcademicSemester } from './../academicSemester/academicSemester.model'
 import { TUser } from './user.interface'
 import { User } from './user.model'
-import { generateStudentId, generateFacultyId } from './user.utils'
+import { generateStudentId, generateFacultyId, generateAdminId } from './user.utils'
 import AppError from '../../errors/appError'
 import httpStatus from 'http-status'
 import { AcademicDepartment } from '../academicDepartment/academicDepartment.model'
 import { TFaculty } from '../faculty/faculty.interface'
 import { Faculty } from '../faculty/faculty.model'
 import { TAdmin } from '../admin/admin.interface'
+import { Admin } from '../admin/admin.model'
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {
   // create a user object
@@ -164,16 +165,16 @@ const createAdminIntoDB = async (password: string, payload: TAdmin) => {
 
     // create a faculty (transaction-2)
 
-    const newFaculty = await Faculty.create([payload], { session });
+    const newAdmin = await Admin.create([payload], { session });
 
-    if (!newFaculty.length) {
-      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create faculty');
+    if (!newAdmin .length) {
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create admin');
     }
 
     await session.commitTransaction();
     await session.endSession();
 
-    return newFaculty;
+    return newAdmin;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     await session.abortTransaction();
@@ -185,5 +186,6 @@ const createAdminIntoDB = async (password: string, payload: TAdmin) => {
 export const UserServices = {
   createStudentIntoDB,
   createFacultyIntoDB,
+  createAdminIntoDB,
 }
 
