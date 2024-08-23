@@ -88,7 +88,7 @@ const deleteAdminFromDB = async (id: string) => {
   }
 };
 
-export const FacultyServices = {
+export const AdminServices = {
   getAllAdminFromDB,
   getSingleAdminFromDB,
   updateAdminIntoDB,
