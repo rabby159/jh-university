@@ -5,13 +5,12 @@ import { Student } from '../student/student.model'
 import { AcademicSemester } from './../academicSemester/academicSemester.model'
 import { TUser } from './user.interface'
 import { User } from './user.model'
-import { generateStudentId } from './user.utils'
+import { generateStudentId, generateFacultyId } from './user.utils'
 import AppError from '../../errors/appError'
 import httpStatus from 'http-status'
 import { AcademicDepartment } from '../academicDepartment/academicDepartment.model'
 import { TFaculty } from '../faculty/faculty.interface'
 import { Faculty } from '../faculty/faculty.model'
-import {generateFacultyId} from '../user/user.utils'
 
 const createStudentIntoDB = async (password: string, payload: TStudent) => {
   // create a user object
@@ -136,14 +135,6 @@ export const UserServices = {
   createFacultyIntoDB,
 }
 function generateFacultyId(): string | PromiseLike<string | undefined> | undefined {
-  throw new Error('Function not implemented.')
-}
-
-function generateAdminId(): string | PromiseLike<string | undefined> | undefined {
-  throw new Error('Function not implemented.')
-}
-
-function generaFaltuId(): string | PromiseLike<string | undefined> | undefined {
   throw new Error('Function not implemented.')
 }
 
