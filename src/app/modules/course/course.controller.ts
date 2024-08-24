@@ -11,11 +11,12 @@ const createCourse = catchAsync(async (req, res) => {
   )
 
   //send response
-  res.status(200).json({
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Course is created successfully',
     data: result,
-  })
+  });
 })
 
 const getAllCourses = catchAsync(async (req, res) => {

@@ -7,10 +7,10 @@ export type TPreRequisiteCourses = {
 }
 
 export type TCourse = {
-    tittle : string;
+    title : string;
     prefix : string;
     code : number;
     credits : number;
-    // isDeleted : boolean,
-    preRequisiteCourses : [];
+    isDeleted : boolean,
+    preRequisiteCourses : [TPreRequisiteCourses];
 }
