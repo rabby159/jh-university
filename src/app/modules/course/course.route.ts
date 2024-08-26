@@ -13,6 +13,8 @@ router.post(
   CourseControllers.createCourse,
 )
 
+//route diclear 
+
 router.get('/:id', CourseControllers.getSingleCourse)
 
 router.delete('/:id', CourseControllers.deleteCourse)
