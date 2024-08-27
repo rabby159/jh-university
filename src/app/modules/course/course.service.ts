@@ -62,7 +62,7 @@ if(preRequisiteCourses && preRequisiteCourses.length > 0){
 }
 
 //filter out the new course fields
-const newPreRequisite = await Course.
+const newPreRequisite = await Course.findById()
 
 
 return updatedBasicCourseInfo
