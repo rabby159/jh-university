@@ -62,7 +62,7 @@ if(preRequisiteCourses && preRequisiteCourses.length > 0){
 }
 
 //filter out the new course fields
-const newPreR
+const newPreRequisite
 
 
 return updatedBasicCourseInfo
