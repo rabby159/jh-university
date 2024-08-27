@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import QueryBuilder from '../../builder/QueryBuilder'
 import { CourseSearchableFields } from './course.constant'
 import { TCourse, TCourseFaculty } from './course.interface'
-import { Course } from './course.model'
+import { Course, CourseFaculty } from './course.model'
 import AppError from '../../errors/appError'
 import httpStatus from 'http-status'
 
@@ -122,8 +122,8 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
     await session.endSession()
     // eslint-disable-next-line no-unused-vars
   } catch (err) {
-    await session.abortTransaction();
-    await session.endSession();
+    await session.abortTransaction()
+    await session.endSession()
     throw new AppError(
       httpStatus.BAD_REQUEST,
       'Failed to deleted pre requisite course',
@@ -141,8 +141,23 @@ const deleteCoursesFromDB = async (id: string) => {
   return result
 }
 
-const assignFacultiesIntoDB = async (id: string, payload: TCourseFaculty) => {}
+const assignFacultiesWithCourseIntoDB = async (
+  id: string,
+  payload: Partial<TCourseFaculty>,
+) => {
+  const result = await CourseFaculty.findByIdAndUpdate(
+    id,
+    {
+      $addToSet: { faculties: { $each: payload } },
+    },
+    {
+      upsert: true,
+      new : true,
+    },
+  )
 
+  return result
+}
 
 export const CourseServices = {
   createCourseIntoDB,
@@ -150,5 +165,5 @@ export const CourseServices = {
   getSingleCourseFromDB,
   deleteCoursesFromDB,
   updateCourseIntoDB,
-  assignFacultiesIntoDB,
+  assignFacultiesWithCourseIntoDB,
 }
