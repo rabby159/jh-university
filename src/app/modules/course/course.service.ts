@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import QueryBuilder from '../../builder/QueryBuilder'
 import { CourseSearchableFields } from './course.constant'
-import { TCourse } from './course.interface'
+import { TCourse, TCourseFaculty } from './course.interface'
 import { Course } from './course.model'
 import AppError from '../../errors/appError'
 import httpStatus from 'http-status'
@@ -141,7 +141,7 @@ const deleteCoursesFromDB = async (id: string) => {
   return result
 }
 
-const assignFacultiesIntoDB = async (id: string, payload: ) => {}
+const assignFacultiesIntoDB = async (id: string, payload: TCourseFaculty) => {}
 
 
 export const CourseServices = {
