@@ -62,7 +62,7 @@ if(preRequisiteCourses && preRequisiteCourses.length > 0){
 }
 
 //filter out the new course fields
-const newPreRequisite = await Course.findById()
+const newPreRequisites = preRequisiteCourses?.filter(el => el.course && !el.isDeleted)
 
 
 return updatedBasicCourseInfo
@@ -87,9 +87,3 @@ export const CourseServices = {
     deleteCoursesFromDB,
     updateCourseIntoDB,
 }
-
-
-// ldf;alksd;flkasd
-//dlalsdkfl;asdf
-//dlkfa;sldkfa
-//flaksjdfkjasdf
