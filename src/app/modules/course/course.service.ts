@@ -87,5 +87,3 @@ export const CourseServices = {
     deleteCoursesFromDB,
     updateCourseIntoDB,
 }
-
-//md rabby
