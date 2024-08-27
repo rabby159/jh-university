@@ -62,7 +62,7 @@ if(preRequisiteCourses && preRequisiteCourses.length > 0){
 }
 
 //filter out the new course fields
-const newPreRequisite
+const newPreRequisite = await Course.
 
 
 return updatedBasicCourseInfo
@@ -87,3 +87,5 @@ export const CourseServices = {
     deleteCoursesFromDB,
     updateCourseIntoDB,
 }
+
+
