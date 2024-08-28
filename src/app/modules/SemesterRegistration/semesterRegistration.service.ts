@@ -58,7 +58,9 @@ const getSingleSemesterRegistrationFromDB = async (id: string) => {
   return result
 }
 
-const updateSemesterRegistrationIntoDB = async () => {}
+const updateSemesterRegistrationIntoDB = async (id: string) => {
+    
+}
 
 export const SemesterRegistrationServices = {
   createSemesterRegistrationIntoDB,
