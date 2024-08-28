@@ -38,8 +38,12 @@ const getAllSemesterRegistration = catchAsync(
 
 const getSingleSemesterRegistration = catchAsync(
   async (req: Request, res: Response) => {
-    const { semesterRegistrationId } = req.params
-    const result = await sendResponse(res, {
+    const { id } = req.params
+
+    const result =
+      await SemesterRegistrationServices.getSingleSemesterRegistrationFromDB(id)
+
+    sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'Semester registration are retrieved successfully',

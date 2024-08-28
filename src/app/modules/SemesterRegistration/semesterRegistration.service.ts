@@ -4,7 +4,6 @@ import { AcademicSemester } from '../academicSemester/academicSemester.model'
 import { TSemesterRegistration } from './semesterRegistration.interface'
 import { SemesterRegistration } from './semesterRegistration.model'
 import QueryBuilder from '../../builder/QueryBuilder'
-import { query } from 'express'
 
 const createSemesterRegistrationIntoDB = async (
   payload: TSemesterRegistration,
@@ -53,7 +52,11 @@ const getAllSemesterRegistrationFromDB = async (
   return result
 }
 
-const getSingleSemesterRegistrationFromDB = async () => {}
+const getSingleSemesterRegistrationFromDB = async (id: string) => {
+  const result = await SemesterRegistration.findById(id)
+
+  return result
+}
 
 const updateSemesterRegistrationIntoDB = async () => {}
 
