@@ -12,8 +12,22 @@ const createSemesterRegistrationValidationSchema = z.object({
   }),
 })
 
+const updateSemesterRegistrationValidationSchema = z.object({
+  body: z.object({
+    academicSemester: z.string().optional(),
+    status: z
+      .enum([...(SemesterRegistrationStatus as [string, ...string[]])])
+      .optional(),
+    startDate: z.string().datetime().optional(),
+    endDate: z.string().datetime().optional(),
+    maxCredit: z.number().optional(),
+    minCredit: z.number().optional(),
+  }),
+})
+
 export const SemesterRegistrationValidations = {
   createSemesterRegistrationValidationSchema,
+  updateSemesterRegistrationValidationSchema,
 }
 
 /* boil plate

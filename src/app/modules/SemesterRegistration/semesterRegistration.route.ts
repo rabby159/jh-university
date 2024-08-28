@@ -15,13 +15,13 @@ router.post(
 
 router.get('/:id', SemesterRegistrationController.getSingleSemesterRegistration)
 
-// router.patch(
-//   '/:semesterId',
-//   validateRequest(
-//     AcademicSemesterValidation.updateAcademicSemesterValidationSchema,
-//   ),
-//   AcademicSemesterControllers.updateAcademicSemester,
-// )
+router.patch(
+  '/:id',
+  validateRequest(
+    SemesterRegistrationValidations.updateSemesterRegistrationValidationSchema,
+  ),
+  SemesterRegistrationController.updateSemesterRegistration,
+)
 
 router.get('/', SemesterRegistrationController.getAllSemesterRegistration)
 
