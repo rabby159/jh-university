@@ -8,3 +8,5 @@ export type TSemesterRegistration = {
   maxCredit: number
   minCredit: number
 }
+
+// export type TSemesterRegistration = {}  //boil plate
