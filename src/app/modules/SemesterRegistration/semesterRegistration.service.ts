@@ -8,7 +8,7 @@ const createSemesterRegistrationIntoDB = async (
   payload: TSemesterRegistration,
 ) => {
   const academicSemester = payload?.academicSemester
-  
+
   //check if the semester is exist
   const isAcademicSemesterExists =
     await AcademicSemester.findById(academicSemester)
@@ -20,6 +20,7 @@ const createSemesterRegistrationIntoDB = async (
     )
   }
 
+  //check is if the semester is already registered
   const isSemesterRegistrationExists = await SemesterRegistration.findOne({
     academicSemester,
   })
@@ -27,6 +28,10 @@ const createSemesterRegistrationIntoDB = async (
   if (isSemesterRegistrationExists) {
     throw new AppError(httpStatus.CONFLICT, 'This semester is already register')
   }
+
+  const result = await SemesterRegistration.create(payload)
+
+  return result
 }
 
 const getAllSemesterRegistrationFromDB = async () => {}
