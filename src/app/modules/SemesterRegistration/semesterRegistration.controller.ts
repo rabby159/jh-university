@@ -6,8 +6,11 @@ import { SemesterRegistrationServices } from './semesterRegistration.service'
 
 const createSemesterRegistration = catchAsync(
   async (req: Request, res: Response) => {
-    const result = await SemesterRegistrationServices.createSemesterRegistrationIntoDB(req.body)   
-    
+    const result =
+      await SemesterRegistrationServices.createSemesterRegistrationIntoDB(
+        req.body,
+      )
+
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -19,10 +22,11 @@ const createSemesterRegistration = catchAsync(
 
 const getAllSemesterRegistration = catchAsync(
   async (req: Request, res: Response) => {
-    const result = await 
-    
-    
-    
+    const result =
+      await SemesterRegistrationServices.getAllSemesterRegistrationFromDB(
+        req.query,
+      )
+
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -35,39 +39,32 @@ const getAllSemesterRegistration = catchAsync(
 const getSingleSemesterRegistration = catchAsync(
   async (req: Request, res: Response) => {
     const { semesterRegistrationId } = req.params
-    const result = await 
-    
-    
-    sendResponse(res, {
+    const result = await sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: 'Semester registration are retrieved successfully',
       data: result,
     })
   },
-);
+)
 
 const updateSemesterRegistration = catchAsync(
-    async (req: Request, res: Response) => {
-
-      const { semesterRegistrationId } = req.params
-      const result = await 
-      
-      
-      
-      sendResponse(res, {
-        statusCode: httpStatus.OK,
-        success: true,
-        message: 'Semester registration are retrieved successfully',
-        data: result,
-      })
-    },
-  )
+  async (req: Request, res: Response) => {
+    const { semesterRegistrationId } = req.params
+    const result = await sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Semester registration are retrieved successfully',
+      data: result,
+    })
+  },
+)
 
 export const SemesterRegistrationController = {
   createSemesterRegistration,
   getAllSemesterRegistration,
   getSingleSemesterRegistration,
+  updateSemesterRegistration,
 }
 
 /*
