@@ -55,7 +55,7 @@ const getSingleSemesterRegistration = catchAsync(
 const updateSemesterRegistration = catchAsync(
   async (req: Request, res: Response) => {
     const { id } = req.params
-    const result = await SemesterRegistrationServices.updateSemesterRegistrationIntoDB(id);
+    const result = await SemesterRegistrationServices.updateSemesterRegistrationIntoDB(id, req.body);
     
     
     sendResponse(res, {
