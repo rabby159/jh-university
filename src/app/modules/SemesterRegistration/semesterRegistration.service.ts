@@ -10,6 +10,20 @@ const createSemesterRegistrationIntoDB = async (
 ) => {
   const academicSemester = payload?.academicSemester
 
+  //check if there any registered semester that is already "UPCOMING"/"ONGOING"
+  const isThereAnyUpcomingOrOngoingSemester = await SemesterRegistration.findOne(
+    {
+      $or: [{ status: 'UPCOMING' }, { status: 'ONGOING' }],
+    },
+  )
+
+  if (isThereAnyUpcomingOrOngoingSemester) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      `There is already a ${isThereAnyUpcomingOrOngoingSemester.status}`,
+    )
+  }
+
   //check if the semester is exist
   const isAcademicSemesterExists =
     await AcademicSemester.findById(academicSemester)
@@ -58,9 +72,7 @@ const getSingleSemesterRegistrationFromDB = async (id: string) => {
   return result
 }
 
-const updateSemesterRegistrationIntoDB = async (id: string) => {
-    
-}
+const updateSemesterRegistrationIntoDB = async (id: string) => {}
 
 export const SemesterRegistrationServices = {
   createSemesterRegistrationIntoDB,
