@@ -1,3 +1,4 @@
+import { JwtPayload, jwt } from 'jsonwebtoken';
 import httpStatus from 'http-status'
 import config from '../../config'
 import { User } from '../user/user.model'
@@ -55,7 +56,7 @@ const loginUser = async (payload: TLoginUser) => {
   return {
     accessToken,
     refreshToken,
-    needsPasswordChange: user?.needsPasswordChange,
+    // needsPasswordChange: user?.needsPasswordChange,
   }
 }
 
